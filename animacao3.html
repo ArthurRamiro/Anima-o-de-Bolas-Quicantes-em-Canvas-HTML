@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Exemplo de animação no Canvas</title>
+
+    <style>
+        canvas {
+            background-color: rgb(232, 240, 237);
+            border: 2px solid rgb(0, 0, 0);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="800" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Define as propriedades do objeto a ser animado
+        let x = canvas.width / 2;
+        let y = canvas.height / 2;
+
+
+        class Factory {
+            crateBola(raio, cor) {
+                // const [x, y] = getRandomPosition()
+                const [vx, vy] = this.getRandomVelocity()
+                if (cor == undefined)
+                    cor = this.getRandomColor()
+
+                if (raio == undefined)
+                    raio = 20
+
+                return new Bola(x, y, vx, vy, raio, cor)
+            }
+
+            getRandomPosition() {
+                let x = parseInt(Math.random() * canvas.width);
+                let y = parseInt(Math.random() * canvas.height);
+
+                return [x, y];
+            }
+
+            getRandomVelocity() {
+                let vx = parseInt(Math.random() * 7) + 1;
+                let vy = parseInt(Math.random() * 7) + 1;
+
+                return [vx, vy];
+            }
+
+            getRandomColor() {
+                var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+                return `#${randomColor}`;
+            }
+        }
+
+
+        class Bola {
+
+            constructor(x, y, vx, vy, raio, cor) {
+                this.x = x;
+                this.y = y;
+                this.vx = vx;
+                this.vy = vy;
+                this.raio = raio;
+                this.cor = cor;
+            }
+
+            desenha() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.raio, 0, 2 * Math.PI);
+                ctx.fillStyle = this.cor;
+                ctx.fill();
+            }
+
+            atualiza() {
+                // atualiza a posição
+                this.x += this.vx;
+                this.y += this.vy;
+
+            }
+
+            verificaLimites() {
+                // Verifica se o objeto saiu da tela em x
+                if (this.x > canvas.width - this.raio || this.x < this.raio) {
+                    this.vx = -this.vx;
+                }
+
+                // Verifica se o objeto saiu da tela em y
+                if (this.y > canvas.height - this.raio || this.y < this.raio) {
+                    this.vy = -this.vy;
+                }
+
+
+            }
+
+            executa() {
+                this.atualiza();
+                this.verificaLimites();
+                this.desenha();
+
+            }
+
+        }
+
+        const N = parseInt(prompt("Quantas bolinhas?"));
+        const factory = new Factory()
+
+        bolas = []
+
+        for (let i = 0; i < N; i++) {
+            bolas.push(factory.crateBola())
+        }
+
+
+        function draw() {
+            // Limpa o canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+ 
+
+            // atualiza e desenha as bolas no frame
+            for (const b of bolas){
+                b.executa()
+            }
+    
+
+            // Chama a função draw novamente após um intervalo de tempo
+            requestAnimationFrame(draw);
+        }
+
+        // Inicia a animação
+        draw();        
+    </script>
+</body>
+
+</html>
