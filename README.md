@@ -1,11 +1,22 @@
 # Animação-de-Bolas-Quicantes-em-Canvas-HTML
-Este projeto demonstra uma animação interativa de múltiplas bolas quicando dentro de um elemento Canvas, onde o usuário pode definir quantas bolas deseja criar.
+Este projeto implementa uma animação interativa de múltiplas bolas quicando dentro de um canvas HTML. O usuário pode personalizar o número de bolas que serão animadas, cada uma com propriedades únicas de velocidade e cor.
 
 Funcionalidades Principais
-Personalização: O usuário define o número de bolas através de um prompt
+🎮 Controle interativo: Escolha quantas bolas deseja animar através de um prompt
 
-Movimento aleatório: Cada bola tem velocidade e direção únicas
+⚡ Movimento dinâmico: Cada bola possui velocidade e direção aleatórias
 
-Colisão com bordas: As bolas quicam naturalmente nas bordas do canvas
+🎨 Cores aleatórias: Geração automática de cores hexadecimal únicas para cada bola
 
-Cores aleatórias: Cada bola recebe uma cor hexadecimal aleatória
+🧪 Física simplificada: Sistema de colisão com as bordas do canvas
+
+🔁 Loop de animação suave: Utilização de requestAnimationFrame para performance otimizada
+
+Como Executar
+Clone o repositório ou baixe o arquivo animacao3.html
+
+Abra o arquivo em qualquer navegador moderno
+
+Quando solicitado, digite o número de bolas que deseja criar
+
+Acompanhe a animação das bolas quicando no canvas!
